@@ -1,0 +1,148 @@
+/**
+ * CreepyButton - Vengeance UI Component
+ * A fun interactive button with animated eyes that follow the cursor
+ * Adapted from https://www.vengenceui.com/r/creepy-button.json
+ */
+
+import React, { useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { cn } from "../lib/utils";
+
+export const CreepyButton = ({
+  children,
+  className,
+  coverClassName,
+  onClick,
+  ...props
+}) => {
+  const eyesRef = useRef(null);
+  const [eyeCoords, setEyeCoords] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const updateEyes = (e) => {
+    const userEvent = "touches" in e ? e.touches[0] : e;
+
+    if (!eyesRef.current) return;
+
+    const eyesRect = eyesRef.current.getBoundingClientRect();
+    const eyesCenter = {
+      x: eyesRect.left + eyesRect.width / 2,
+      y: eyesRect.top + eyesRect.height / 2,
+    };
+
+    const cursor = {
+      x: userEvent.clientX,
+      y: userEvent.clientY,
+    };
+
+    const dx = cursor.x - eyesCenter.x;
+    const dy = cursor.y - eyesCenter.y;
+    const angle = Math.atan2(-dy, dx) + Math.PI / 2;
+
+    const visionRangeX = 180;
+    const visionRangeY = 75;
+    const distance = Math.hypot(dx, dy);
+
+    const x = (Math.sin(angle) * Math.min(distance, visionRangeX)) / visionRangeX;
+    const y = (Math.cos(angle) * Math.min(distance, visionRangeY)) / visionRangeY;
+
+    setEyeCoords({ x, y });
+  };
+
+  const resetEyes = () => {
+    setEyeCoords({ x: 0, y: 0 });
+    setIsHovered(false);
+  };
+
+  const pupilStyle = {
+    transform: `translate(calc(-50% + ${eyeCoords.x * 50}%), calc(-50% + ${eyeCoords.y * 50}%))`,
+  };
+
+  return (
+    <button
+      className={cn(
+        "relative min-w-[9em] rounded-xl bg-black cursor-pointer outline-none select-none group",
+        "focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-400",
+        className
+      )}
+      onClick={onClick}
+      onMouseMove={(e) => {
+        updateEyes(e);
+        setIsHovered(true);
+      }}
+      onTouchMove={updateEyes}
+      onMouseLeave={resetEyes}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
+      {...props}
+    >
+      {/* Eyes Container */}
+      <span
+        ref={eyesRef}
+        className="absolute flex items-center gap-[0.375em] right-[1em] bottom-[0.5em] h-[0.75em] z-0 pointer-events-none"
+      >
+        {/* Left Eye */}
+        <motion.span
+          className="relative w-[0.75em] bg-white rounded-full overflow-hidden"
+          animate={{ height: ["0.75em", "0.75em", "0em", "0.75em"] }}
+          transition={{
+            duration: 3,
+            times: [0, 0.92, 0.96, 1],
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <span
+            className="absolute top-1/2 left-1/2 w-[0.375em] h-[0.375em] bg-black rounded-full transition-transform duration-75 ease-out"
+            style={pupilStyle}
+          />
+        </motion.span>
+        {/* Right Eye */}
+        <motion.span
+          className="relative w-[0.75em] bg-white rounded-full overflow-hidden"
+          animate={{ height: ["0.75em", "0.75em", "0em", "0.75em"] }}
+          transition={{
+            duration: 3,
+            times: [0, 0.92, 0.96, 1],
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        >
+          <span
+            className="absolute top-1/2 left-1/2 w-[0.375em] h-[0.375em] bg-black rounded-full transition-transform duration-75 ease-out"
+            style={pupilStyle}
+          />
+        </motion.span>
+      </span>
+
+      {/* Button Cover */}
+      <motion.span
+        className={cn(
+          "absolute inset-0 block rounded-xl bg-blue-500 text-white font-bold text-sm tracking-wide",
+          "shadow-[inset_0_0_0_0.125em_rgba(0,0,0,0.8)]",
+          "flex items-center justify-center px-5 py-2.5",
+          "origin-[1.25em_50%]",
+          coverClassName
+        )}
+        animate={{
+          rotate: isHovered ? -12 : 0,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+          mass: 0.8,
+        }}
+      >
+        {children}
+      </motion.span>
+
+      {/* Invisible placeholder to maintain size */}
+      <span className="flex items-center justify-center opacity-0 px-5 py-2.5 h-[44px] font-bold text-sm tracking-wide min-w-[9em]">
+        {children}
+      </span>
+    </button>
+  );
+};
+
+export default CreepyButton;
