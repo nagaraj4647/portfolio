@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import LoadingScreen from './components/LoadingScreen';
 import ScrollProgress from './components/ScrollProgress';
 import ParticleBackground from './components/ParticleBackground';
@@ -13,6 +14,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
+import PageTransition from './components/PageTransition';
 
 function App() {
   const location = useLocation();
@@ -69,16 +71,18 @@ function App() {
       {!isAdminPage && <Navbar activeSection={activeSection} navLinks={navLinks} />}
       {!isAdminPage && <MobileBottomNav activeSection={activeSection} navLinks={navLinks} />}
 
-      <main style={{ minHeight: '100vh' }}>
-        <Routes>
-          <Route path="/" element={<Hero />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/techstack" element={<TechStack />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
+      <main style={{ minHeight: '100vh', position: 'relative' }}>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<PageTransition><Hero /></PageTransition>} />
+            <Route path="/about" element={<PageTransition><About /></PageTransition>} />
+            <Route path="/techstack" element={<PageTransition><TechStack /></PageTransition>} />
+            <Route path="/skills" element={<PageTransition><Skills /></PageTransition>} />
+            <Route path="/projects" element={<PageTransition><Projects /></PageTransition>} />
+            <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
+            <Route path="/admin" element={<PageTransition><Admin /></PageTransition>} />
+          </Routes>
+        </AnimatePresence>
       </main>
 
       {!isAdminPage && <Footer />}

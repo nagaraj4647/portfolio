@@ -139,14 +139,12 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <motion.div
-              className="hero-buttons-container"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.85 }}
-              style={{ display: 'flex', gap: '14px', marginBottom: '36px', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center' }}
+              style={{ display: 'flex', gap: '14px', marginBottom: '36px', flexWrap: 'wrap', alignItems: 'center' }}
             >
               <motion.button
-                className="hero-btn"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => navigate('/projects')}
@@ -170,7 +168,6 @@ export default function Hero() {
               </motion.button>
 
               <motion.button
-                className="hero-btn"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => navigate('/contact')}
