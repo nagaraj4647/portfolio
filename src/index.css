@@ -525,6 +525,16 @@ textarea.form-input {
     transform-origin: center top;
     margin-top: -20px;
   }
+  .hero-buttons-container {
+    width: 100%;
+    max-width: 300px;
+    margin-inline: auto;
+    flex-direction: column;
+  }
+  .hero-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ===== Footer Grid Mobile Alignment ===== */
