@@ -71,7 +71,7 @@ function App() {
       {!isAdminPage && <Navbar activeSection={activeSection} navLinks={navLinks} />}
       {!isAdminPage && <MobileBottomNav activeSection={activeSection} navLinks={navLinks} />}
 
-      <main style={{ minHeight: '100vh', position: 'relative' }}>
+      <main style={{ minHeight: '100vh', overflow: 'hidden' }}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageTransition><Hero /></PageTransition>} />
