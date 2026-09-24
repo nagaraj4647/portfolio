@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import LoadingScreen from './components/LoadingScreen';
 import ScrollProgress from './components/ScrollProgress';
 import ParticleBackground from './components/ParticleBackground';
 import Navbar from './components/Navbar';
+import MobileBottomNav from './components/MobileBottomNav';
 import Hero from './components/Hero';
 import About from './components/About';
 import TechStack from './components/TechStack';
@@ -12,31 +14,20 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
-  const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
-  // Track active section for navbar highlight
-  useEffect(() => {
-    const sections = ['home', 'about', 'techstack', 'skills', 'projects', 'contact'];
+  // Map pathname back to section id for nav highlights
+  const activeSection = location.pathname === '/' ? 'home' : location.pathname.slice(1);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-40% 0px -50% 0px' }
-    );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const navLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Tech Stack', href: '/techstack' },
+    { label: 'Skills', href: '/skills' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Contact', href: '/contact' },
+  ];
 
   // Cursor glow effect (desktop only)
   useEffect(() => {
@@ -71,15 +62,18 @@ function App() {
         }}
       />
 
-      <Navbar activeSection={activeSection} />
+      <Navbar activeSection={activeSection} navLinks={navLinks} />
+      <MobileBottomNav activeSection={activeSection} navLinks={navLinks} />
 
-      <main>
-        <Hero />
-        <About />
-        <TechStack />
-        <Skills />
-        <Projects />
-        <Contact />
+      <main style={{ minHeight: '100vh' }}>
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/techstack" element={<TechStack />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </main>
 
       <Footer />

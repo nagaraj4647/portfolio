@@ -283,7 +283,7 @@ export default function Hero() {
                 boxShadow: '0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(99,102,241,0.1)',
               }}>
                 <img
-                  src="/avatar.png"
+                  src="/avatar.jpg"
                   alt="Nagarajan M - Full Stack Developer"
                   style={{ width: '100%', height: 'auto', display: 'block' }}
                 />

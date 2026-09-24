@@ -60,54 +60,42 @@ export default function LoadingScreen() {
             }}
           />
 
-          <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center">
-            {/* Holographic Spinning Orbit Ring */}
-            <div className="relative mb-8 flex items-center justify-center">
-              {/* Outer Dashed Orbit */}
-              <motion.div
-                className="absolute w-36 h-36 rounded-full border-2 border-dashed border-indigo-500/40"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-              />
-
-              {/* Inner Glowing Orbit */}
-              <motion.div
-                className="absolute w-28 h-28 rounded-full border border-purple-500/50 shadow-[0_0_25px_rgba(168,85,247,0.3)]"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-              />
-
-              {/* Central Glowing Monogram */}
-              <motion.div
-                initial={{ scale: 0.6, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="relative w-24 h-24 rounded-3xl bg-neutral-900/90 border border-white/20 backdrop-blur-2xl flex items-center justify-center shadow-[0_0_40px_rgba(99,102,241,0.35)]"
-              >
-                <span className="text-4xl font-black tracking-wider bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(168,85,247,0.6)]">
-                  NM
+          <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center mt-12">
+            {/* Cinematic Typographic Logo */}
+            <div className="relative mb-12 flex flex-col items-center justify-center">
+              <div className="flex items-center gap-4 text-5xl md:text-6xl font-black tracking-tighter">
+                {/* MJ part */}
+                <span className="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.4)]">
+                  mj
                 </span>
+                
+                {/* Separator */}
+                <motion.span 
+                  initial={{ scaleY: 0 }}
+                  animate={{ scaleY: 1 }}
+                  transition={{ delay: 0.4, duration: 0.5, ease: 'easeOut' }}
+                  className="w-[3px] h-12 md:h-14 bg-indigo-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.8)]"
+                />
 
-                {/* Corner Accent Dots */}
-                <div className="absolute top-2 left-2 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]" />
-                <div className="absolute bottom-2 right-2 w-2 h-2 rounded-full bg-pink-500 shadow-[0_0_8px_#ec4899]" />
-              </motion.div>
+                {/* devx part */}
+                <motion.span
+                  initial={{ opacity: 0, x: -20, filter: 'blur(10px)' }}
+                  animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                  transition={{ delay: 0.8, duration: 0.6, ease: 'easeOut' }}
+                  className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(168,85,247,0.5)]"
+                >
+                  devx
+                </motion.span>
+              </div>
+              
+              {/* Subtle underline glowing pulse */}
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 0.5 }}
+                transition={{ delay: 1.2, duration: 0.8, ease: 'easeInOut' }}
+                className="mt-8 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400 to-transparent"
+              />
             </div>
-
-            {/* Name & Subtitle */}
-            <motion.div
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="space-y-1 mb-8"
-            >
-              <h1 className="text-2xl font-black tracking-tight text-white flex items-center justify-center gap-2">
-                NAGARAJAN M <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
-              </h1>
-              <p className="text-xs text-neutral-400 font-mono tracking-widest uppercase">
-                Full-Stack Portfolio Ecosystem
-              </p>
-            </motion.div>
 
             {/* Progress Bar & Realtime Percentage */}
             <div className="w-full space-y-2.5">

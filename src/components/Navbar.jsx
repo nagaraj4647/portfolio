@@ -1,20 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, FileDown } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import GooeyNav from './GooeyNav';
 
-const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Tech Stack', href: '#techstack' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
-];
-
-export default function Navbar({ activeSection }) {
+export default function Navbar({ activeSection, navLinks }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -31,8 +24,8 @@ export default function Navbar({ activeSection }) {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    navigate(href);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -66,7 +59,6 @@ export default function Navbar({ activeSection }) {
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
-          {/* Logo */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
@@ -80,9 +72,19 @@ export default function Navbar({ activeSection }) {
               backgroundClip: 'text',
               textDecoration: 'none',
               letterSpacing: '-0.04em',
+              display: 'flex',
+              alignItems: 'center',
             }}
           >
-            NM
+            <span>mj</span>
+            <motion.span
+              initial={{ opacity: 0, x: -10, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
+              style={{ display: 'inline-block', marginLeft: '2px' }}
+            >
+              devx
+            </motion.span>
           </a>
 
           {/* Desktop Nav Links — GooeyNav */}
@@ -97,8 +99,8 @@ export default function Navbar({ activeSection }) {
                 onClick: (e) => handleNavClick(e, link.href),
               }))}
               initialActiveIndex={navLinks.findIndex(
-                (l) => l.href.slice(1) === activeSection
-              ) === -1 ? 0 : navLinks.findIndex((l) => l.href.slice(1) === activeSection)}
+                (l) => (l.href === '/' ? 'home' : l.href.slice(1)) === activeSection
+              ) === -1 ? 0 : navLinks.findIndex((l) => (l.href === '/' ? 'home' : l.href.slice(1)) === activeSection)}
               particleCount={15}
               particleDistances={[90, 10]}
               particleR={100}
@@ -122,90 +124,13 @@ export default function Navbar({ activeSection }) {
             </a>
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            className="nav-mobile-toggle"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-            style={{
-              display: 'none',
-              background: 'none',
-              border: 'none',
-              color: '#f0f0f5',
-              cursor: 'pointer',
-              padding: '8px',
-            }}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
       </motion.nav>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              position: 'fixed',
-              inset: 0,
-              zIndex: 999,
-              background: 'rgba(5, 5, 16, 0.95)',
-              backdropFilter: 'blur(30px)',
-              WebkitBackdropFilter: 'blur(30px)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '12px',
-            }}
-          >
-            {navLinks.map((link, i) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-                style={{
-                  fontSize: '1.25rem',
-                  fontWeight: 600,
-                  color: activeSection === link.href.slice(1)
-                    ? '#f0f0f5'
-                    : '#8a8aa3',
-                  textDecoration: 'none',
-                  padding: '12px 32px',
-                  borderRadius: '12px',
-                  transition: 'color 0.3s ease',
-                }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
-            <motion.a
-              href="/Nagarajan_M_Resume.pdf"
-              download="Nagarajan_M_Resume.pdf"
-              className="btn-primary"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: navLinks.length * 0.08 }}
-              style={{ marginTop: '12px' }}
-            >
-              <FileDown size={16} />
-              Resume
-            </motion.a>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <style>{`
         @media (max-width: 768px) {
           .nav-desktop { display: none !important; }
-          .nav-mobile-toggle { display: block !important; }
+          .nav-mobile-toggle { display: none !important; }
         }
       `}</style>
     </>

@@ -1,0 +1,108 @@
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: rgba(10, 10, 25, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px 20px 0 0;
+  z-index: 1000;
+  box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-bottom-nav ul {
+  display: flex;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.mobile-bottom-nav ul li {
+  position: relative;
+  width: calc(100% / 6);
+  height: 70px;
+  z-index: 1;
+}
+
+.mobile-bottom-nav ul li a {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  text-decoration: none;
+  color: #7a7a96;
+}
+
+.mobile-bottom-nav ul li a .icon {
+  position: relative;
+  display: block;
+  line-height: 75px;
+  font-size: 1.5em;
+  text-align: center;
+  transition: 0.5s;
+  color: #7a7a96;
+  margin-top: 15px;
+}
+
+.mobile-bottom-nav ul li.active a .icon {
+  transform: translateY(-34px);
+  color: #f0f0f8;
+}
+
+.mobile-bottom-nav ul li a .text {
+  position: absolute;
+  color: #f0f0f8;
+  font-weight: 700;
+  font-size: 0.65em;
+  letter-spacing: 0.05em;
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(20px);
+  bottom: 8px;
+}
+
+.mobile-bottom-nav ul li.active a .text {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.mobile-bottom-nav .indicator {
+  position: absolute;
+  top: -30px;
+  width: calc(100% / 6);
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  transition: 0.5s;
+  z-index: 0;
+}
+
+.mobile-bottom-nav .indicator::before {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: #0a0a19;
+  border-radius: 50%;
+  border: 4px solid #a855f7; /* Purple border matching theme */
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+/* For responsive testing, hide on desktop */
+@media (min-width: 769px) {
+  .mobile-bottom-nav {
+    display: none;
+  }
+}

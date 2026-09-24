@@ -1,14 +1,15 @@
 import { motion } from 'framer-motion';
 import { Mail, Heart, ArrowUpRight } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
 const footerLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Tech Stack', href: '#techstack' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Tech Stack', href: '/techstack' },
+  { label: 'Skills', href: '/skills' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const socialLinks = [
@@ -18,10 +19,12 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const handleClick = (e, href) => {
+  const navigate = useNavigate();
+
+  const handleBrandClick = (e) => {
     e.preventDefault();
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    navigate('/');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -54,8 +57,8 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <a
-              href="#home"
-              onClick={(e) => handleClick(e, '#home')}
+              href="/"
+              onClick={handleBrandClick}
               style={{
                 fontFamily: "'Outfit', 'Inter', sans-serif",
                 fontSize: '2rem',
@@ -118,16 +121,16 @@ export default function Footer() {
             </h4>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 16px' }}>
               {footerLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleClick(e, link.href)}
+                  to={link.href}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   style={{ color: '#4a4a62', textDecoration: 'none', fontSize: '0.87rem', padding: '5px 0', transition: 'color 0.3s ease', display: 'inline-block' }}
                   onMouseEnter={(e) => { e.target.style.color = '#f0f0f8'; }}
                   onMouseLeave={(e) => { e.target.style.color = '#4a4a62'; }}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
