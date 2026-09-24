@@ -97,23 +97,6 @@ export default function LoadingScreen() {
                 className="mt-8 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400 to-transparent"
               />
             </div>
-
-            {/* Progress Bar & Realtime Percentage */}
-            <div className="w-full space-y-2.5">
-              <div className="relative w-full h-2.5 rounded-full bg-white/10 overflow-hidden backdrop-blur-md p-[1px] border border-white/10">
-                <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 shadow-[0_0_20px_rgba(168,85,247,0.8)]"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-
-              <div className="flex justify-between items-center text-[11px] font-mono text-neutral-400">
-                <span className="flex items-center gap-1.5 text-indigo-400 font-medium">
-                  <Zap className="w-3.5 h-3.5 text-amber-400 animate-bounce" /> {statusText}
-                </span>
-                <span className="font-bold text-white tracking-widest">{progress}%</span>
-              </div>
-            </div>
           </div>
         </motion.div>
       )}
