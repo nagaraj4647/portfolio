@@ -12,10 +12,14 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Admin from './components/Admin';
 
 function App() {
   const location = useLocation();
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+
+  // Check if current route is admin portal
+  const isAdminPage = location.pathname === '/admin';
 
   // Map pathname back to section id for nav highlights
   const activeSection = location.pathname === '/' ? 'home' : location.pathname.slice(1);
@@ -62,8 +66,8 @@ function App() {
         }}
       />
 
-      <Navbar activeSection={activeSection} navLinks={navLinks} />
-      <MobileBottomNav activeSection={activeSection} navLinks={navLinks} />
+      {!isAdminPage && <Navbar activeSection={activeSection} navLinks={navLinks} />}
+      {!isAdminPage && <MobileBottomNav activeSection={activeSection} navLinks={navLinks} />}
 
       <main style={{ minHeight: '100vh' }}>
         <Routes>
@@ -73,10 +77,11 @@ function App() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
 
-      <Footer />
+      {!isAdminPage && <Footer />}
     </>
   );
 }

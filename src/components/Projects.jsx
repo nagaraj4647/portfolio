@@ -3,8 +3,9 @@ import AnimatedSection from './AnimatedSection';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ArrowUpRight, Globe, CheckCircle2, X, ExternalLink } from 'lucide-react';
 import { useOutsideClick } from '../hooks/use-outside-click';
+import { supabase } from '../lib/supabase';
 
-const projects = [
+export const projects = [
   {
     id: 'balnex-kitchen',
     title: 'Balnex Kitchen',
@@ -172,8 +173,19 @@ const categories = ['All Projects', 'Internship', 'Web Apps', 'Full Stack'];
 export default function Projects() {
   const [activeTab, setActiveTab] = useState('All Projects');
   const [active, setActive] = useState(null);
+  const [dbProjects, setDbProjects] = useState([]);
   const ref = useRef(null);
   const id = useId();
+
+  useEffect(() => {
+    async function loadProjects() {
+      const { data, error } = await supabase.from('projects').select('*');
+      if (!error && data && data.length > 0) {
+        setDbProjects(data);
+      }
+    }
+    loadProjects();
+  }, []);
 
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') setActive(null); };
@@ -184,7 +196,8 @@ export default function Projects() {
 
   useOutsideClick(ref, () => setActive(null));
 
-  const filtered = activeTab === 'All Projects' ? projects : projects.filter(p => p.category === activeTab);
+  const allProjects = [...dbProjects, ...projects.filter(p => !dbProjects.find(dp => dp.id === p.id))];
+  const filtered = activeTab === 'All Projects' ? allProjects : allProjects.filter(p => p.category === activeTab);
 
   return (
     <section id="projects" className="section relative overflow-hidden">

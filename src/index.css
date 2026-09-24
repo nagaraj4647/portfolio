@@ -481,3 +481,57 @@ textarea.form-input {
   border: 1px solid rgba(99,102,241,0.2);
   color: #a5b4fc;
 }
+
+/* ===== Hero Grid Mobile Alignment ===== */
+.ambient-glow { filter: blur(50px); }
+.hero-rotating-ring { display: block; }
+
+@media (max-width: 900px) {
+  /* Performance optimizations */
+  .ambient-glow { filter: blur(15px); opacity: 0.5; }
+  .hero-rotating-ring { display: none; }
+  .aurora-bg::before { animation: none !important; opacity: 0.6; }
+  
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    padding-top: 20px;
+    padding-inline: 16px;
+  }
+  .hero-grid > div:first-child {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .hero-grid > div:first-child h1 {
+    font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+  }
+  .hero-grid > div:last-child {
+    order: 2;
+    transform: scale(0.85); /* Make the entire avatar + chips smaller */
+    transform-origin: center top;
+    margin-top: -20px;
+  }
+}
+
+/* ===== Footer Grid Mobile Alignment ===== */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 32px !important;
+  }
+  .footer-grid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-grid p {
+    text-align: center;
+  }
+  .footer-grid h4 {
+    text-align: center;
+  }
+}

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
 import { ArrowRight, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
@@ -26,6 +27,8 @@ const chipPositions = [
 ];
 
 export default function Hero() {
+  const navigate = useNavigate();
+
   return (
     <section
       id="home"
@@ -144,7 +147,7 @@ export default function Hero() {
               <motion.button
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => navigate('/projects')}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -167,7 +170,7 @@ export default function Hero() {
               <motion.button
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => navigate('/contact')}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -242,17 +245,17 @@ export default function Hero() {
             style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}
           >
             {/* Ambient glow behind avatar */}
-            <div style={{
+            <div className="ambient-glow" style={{
               position: 'absolute',
               width: '75%', height: '75%',
               background: 'radial-gradient(circle, rgba(99,102,241,0.18) 0%, rgba(168,85,247,0.10) 40%, transparent 70%)',
-              filter: 'blur(50px)',
               borderRadius: '50%',
               zIndex: 0,
             }} />
 
             {/* Rotating ring */}
             <motion.div
+              className="hero-rotating-ring"
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
               style={{

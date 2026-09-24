@@ -10,6 +10,7 @@ const footerLinks = [
   { label: 'Skills', href: '/skills' },
   { label: 'Projects', href: '/projects' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Admin Portal', href: '/admin' },
 ];
 
 const socialLinks = [
@@ -73,9 +74,9 @@ export default function Footer() {
                 letterSpacing: '-0.04em',
               }}
             >
-              NM
+              mj devx
             </a>
-            <p style={{ color: '#4a4a62', fontSize: '0.87rem', lineHeight: 1.7, maxWidth: '260px', marginBottom: '20px' }}>
+            <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.87rem', lineHeight: 1.7, maxWidth: '260px', marginBottom: '20px' }}>
               Full Stack Developer building modern web apps and AI-powered automation solutions.
             </p>
             <div style={{ display: 'flex', gap: '8px' }}>
@@ -116,7 +117,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ fontSize: '0.72rem', fontWeight: 700, color: '#4a4a62', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '20px' }}>
+            <h4 style={{ fontSize: '0.72rem', fontWeight: 700, color: 'rgba(255,255,255,0.8)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '20px' }}>
               Navigation
             </h4>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px 16px' }}>
@@ -125,9 +126,9 @@ export default function Footer() {
                   key={link.href}
                   to={link.href}
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  style={{ color: '#4a4a62', textDecoration: 'none', fontSize: '0.87rem', padding: '5px 0', transition: 'color 0.3s ease', display: 'inline-block' }}
+                  style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: '0.87rem', padding: '5px 0', transition: 'color 0.3s ease', display: 'inline-block' }}
                   onMouseEnter={(e) => { e.target.style.color = '#f0f0f8'; }}
-                  onMouseLeave={(e) => { e.target.style.color = '#4a4a62'; }}
+                  onMouseLeave={(e) => { e.target.style.color = 'rgba(255,255,255,0.6)'; }}
                 >
                   {link.label}
                 </Link>
@@ -137,10 +138,10 @@ export default function Footer() {
 
           {/* CTA */}
           <div>
-            <h4 style={{ fontSize: '0.72rem', fontWeight: 700, color: '#4a4a62', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '20px' }}>
+            <h4 style={{ fontSize: '0.72rem', fontWeight: 700, color: 'rgba(255,255,255,0.8)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '20px' }}>
               Let's Work
             </h4>
-            <p style={{ color: '#4a4a62', fontSize: '0.84rem', lineHeight: 1.65, marginBottom: '16px' }}>
+            <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.84rem', lineHeight: 1.65, marginBottom: '16px' }}>
               Open to freelance projects and full-time opportunities.
             </p>
             <motion.a
