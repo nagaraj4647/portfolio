@@ -40,6 +40,7 @@ export default function LoadingScreen() {
       {isLoading && (
         <motion.div
           className="fixed inset-0 z-[99999] flex items-center justify-center bg-[#050510] overflow-hidden select-none"
+          style={{ minHeight: '100dvh' }}
           initial={{ opacity: 1 }}
           exit={{
             opacity: 0,
