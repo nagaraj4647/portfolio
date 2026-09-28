@@ -7,6 +7,26 @@ import { supabase } from '../lib/supabase';
 
 export const projects = [
   {
+    id: 'mj-makeup-studio',
+    title: 'MJ Makeup Studio',
+    category: 'Web Apps',
+    tagline: 'Professional Makeup Studio Demo Website',
+    description: 'A modern, elegant demo website for a makeup studio to showcase bridal services, makeovers, and portfolio galleries.',
+    tech: ['React', 'Tailwind CSS', 'Vite', 'Framer Motion'],
+    liveUrl: 'https://mj-makeup-studio-five.vercel.app/',
+    gradient: 'linear-gradient(135deg, #f43f5e 0%, #e11d48 50%, #9f1239 100%)',
+    glowColor: 'rgba(244,63,94,0.3)',
+    accentColor: '#fb7185',
+    icon: '💄',
+    badge: 'Demo',
+    highlights: [
+      'Elegant Portfolio Showcase',
+      'Services & Bridal Packages',
+      'Smooth Scrolling & Animations',
+      'Responsive Mobile-first Design',
+    ],
+  },
+  {
     id: 'balnex-kitchen',
     title: 'Balnex Kitchen',
     category: 'Web Apps',

@@ -111,7 +111,7 @@ export default function Hero() {
               <TypeAnimation
                 sequence={[
                   'Full Stack Developer', 2200,
-                  'Prompt Engineer',      2000,
+                  'Web Developer',      2000,
                 ]}
                 wrapper="span"
                 speed={55}
