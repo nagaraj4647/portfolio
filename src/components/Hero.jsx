@@ -357,7 +357,7 @@ export default function Hero() {
       `}</style>
     </section>
     <LocalServices />
-    <style>{` keep the portfolio's glass-card palette. */
+    <style>{`/* Keep the portfolio's glass-card palette. */
 .local-services { padding-top: 48px; padding-bottom: 88px; }
 .local-services-eyebrow { color: #a5b4fc; font-size: .78rem; font-weight: 700; letter-spacing: .12em; margin-bottom: 14px; }
 .local-services h1 { font-family: 'Outfit', 'Inter', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.18; letter-spacing: -.03em; max-width: 780px; }
