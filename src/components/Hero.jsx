@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, Mail, Globe, ShoppingBag, CalendarDays, Code2 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
 const SOCIAL = [
@@ -30,6 +30,7 @@ export default function Hero() {
   const navigate = useNavigate();
 
   return (
+    <>
     <section
       id="home"
       className="section"
@@ -75,7 +76,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Name */}
-            <motion.h1
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.55 }}
@@ -90,7 +91,7 @@ export default function Hero() {
             >
               Nagarajan{' '}
               <span className="gradient-text-animated">M</span>
-            </motion.h1>
+            </motion.h2>
 
             {/* Typing role */}
             <motion.div
@@ -354,6 +355,66 @@ export default function Hero() {
           }
         }
       `}</style>
+    </section>
+    <LocalServices />
+    <style>{` keep the portfolio's glass-card palette. */
+.local-services { padding-top: 48px; padding-bottom: 88px; }
+.local-services-eyebrow { color: #a5b4fc; font-size: .78rem; font-weight: 700; letter-spacing: .12em; margin-bottom: 14px; }
+.local-services h1 { font-family: 'Outfit', 'Inter', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.18; letter-spacing: -.03em; max-width: 780px; }
+.local-services-intro { color: #aaaac0; max-width: 760px; margin: 20px 0 32px; line-height: 1.8; }
+.local-services-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.local-service-card { padding: 26px 22px; background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-lg); }
+.local-service-card > svg { color: #a5b4fc; margin-bottom: 18px; }
+.local-service-card h2 { font-size: 1.06rem; line-height: 1.4; margin-bottom: 10px; }
+.local-service-card p, .local-services-work p { color: #aaaac0; font-size: .92rem; line-height: 1.75; }
+.local-services-work { margin-top: 28px; padding: 28px; background: rgba(99,102,241,.05); border: 1px solid rgba(99,102,241,.16); border-radius: var(--radius-lg); display: flex; gap: 28px; align-items: center; justify-content: space-between; }
+.local-services-work h2 { font-size: 1.25rem; margin-bottom: 10px; }
+.local-services-work p { max-width: 580px; }
+.local-services-actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+.local-services-actions a { display: inline-flex; gap: 10px; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.14); border-radius: 12px; padding: 12px 20px; color: #f0f0f8; font-size: .9rem; font-weight: 600; text-decoration: none; }
+.local-services-actions a:hover { border-color: #a5b4fc; }
+.local-services-actions .local-services-primary { background: var(--gradient-primary); border-color: transparent; }
+@media (max-width: 1000px) { .local-services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .local-services { padding-top: 32px; padding-bottom: 64px; } .local-services-grid { grid-template-columns: 1fr; } .local-services-work { flex-direction: column; align-items: stretch; padding: 22px; } .local-services-actions { flex-direction: column; } }
+`}</style>
+    </>
+  );
+}
+
+const services = [
+  { icon: Globe, title: 'Business websites', copy: 'Show your services, photos, opening hours and contact details in a mobile-friendly website.' },
+  { icon: ShoppingBag, title: 'E-commerce websites', copy: 'Let customers browse your products and place orders online.' },
+  { icon: CalendarDays, title: 'Booking systems', copy: 'Make appointments and enquiries easier with a booking website built for your business.' },
+  { icon: Code2, title: 'Apps & custom software', copy: 'Web apps, mobile app development and software for your business workflow.' },
+];
+
+function LocalServices() {
+  return (
+    <section id="rameswaram-services" className="section local-services" aria-labelledby="local-services-title">
+      <div className="container">
+        <p className="local-services-eyebrow">MJ DEVX · RAMESWARAM</p>
+        <h1 id="local-services-title">Website design in <span className="gradient-text">Rameswaram</span></h1>
+        <p className="local-services-intro">I'm Nagarajan, a Rameswaram-based full stack developer. I build business websites, online shops, apps and custom software for businesses in Rameswaram and Ramanathapuram.</p>
+        <div className="local-services-grid">
+          {services.map(({ icon: Icon, title, copy }) => (
+            <article className="local-service-card" key={title}>
+              <Icon size={24} aria-hidden="true" />
+              <h2>{title}</h2>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+        <div className="local-services-work">
+          <div>
+            <h2>See what I've built</h2>
+            <p>Explore the Sri Balaji Tailoring website and booking portal in my portfolio, alongside clearly labelled demo projects. Let's talk about what your business needs.</p>
+          </div>
+          <div className="local-services-actions">
+            <Link to="/projects">View work <ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link to="/contact" className="local-services-primary">Discuss your website <ArrowRight size={16} aria-hidden="true" /></Link>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
