@@ -3,11 +3,6 @@ import AnimatedSection from './AnimatedSection';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Send, CheckCircle, AlertCircle, User, AtSign, MessageSquare, MapPin } from 'lucide-react';
 import { LinkedinIcon } from './Icons';
-import emailjs from '@emailjs/browser';
-
-const EMAILJS_SERVICE  = import.meta.env.VITE_EMAILJS_SERVICE_ID  || 'YOUR_SERVICE_ID';
-const EMAILJS_TEMPLATE = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
-const EMAILJS_KEY      = import.meta.env.VITE_EMAILJS_PUBLIC_KEY  || 'YOUR_PUBLIC_KEY';
 
 const contactInfo = [
   {
@@ -37,29 +32,25 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (status === 'submitting') return;
     setStatus('submitting');
 
+    const message = `Website enquiry\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
+    const whatsappUrl = new URL('https://wa.me/916379835744');
+    whatsappUrl.searchParams.set('text', message);
+
     try {
-      await emailjs.send(
-        EMAILJS_SERVICE,
-        EMAILJS_TEMPLATE,
-        {
-          from_name:    formData.name,
-          from_email:   formData.email,
-          message:      formData.message,
-          to_name:      'Nagarajan',
-        },
-        EMAILJS_KEY
-      );
+      const whatsappTab = window.open('about:blank', '_blank');
+      if (!whatsappTab) throw new Error('Popup blocked');
+      whatsappTab.opener = null;
+      whatsappTab.location.href = whatsappUrl.toString();
       setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
       setTimeout(() => setStatus('idle'), 5000);
     } catch {
       setStatus('error');
-      setTimeout(() => setStatus('idle'), 4000);
+      setTimeout(() => setStatus('idle'), 5000);
     }
   };
 
@@ -240,7 +231,7 @@ export default function Contact() {
                         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                         style={{ width: '16px', height: '16px', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: 'white', borderRadius: '50%' }}
                       />
-                      Sending…
+                      Opening WhatsApp…
                     </>
                   ) : (
                     <><Send size={16} /> Send Message</>
@@ -265,7 +256,7 @@ export default function Contact() {
                     }}
                   >
                     <CheckCircle size={17} />
-                    Message sent! I'll get back to you soon.
+                    WhatsApp opened. Press Send there to send your enquiry.
                   </motion.div>
                 )}
                 {status === 'error' && (
@@ -283,7 +274,7 @@ export default function Contact() {
                     }}
                   >
                     <AlertCircle size={17} />
-                    Something went wrong. Please try again or email directly.
+                    WhatsApp could not open. Allow pop-ups and try again. Your message is still here.
                   </motion.div>
                 )}
               </AnimatePresence>
