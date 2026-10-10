@@ -393,8 +393,8 @@ function LocalServices() {
     <section id="rameswaram-services" className="section local-services" aria-labelledby="local-services-title">
       <div className="container">
         <p className="local-services-eyebrow">MJ DEVX · RAMESWARAM</p>
-        <h1 id="local-services-title">Website design in <span className="gradient-text">Rameswaram</span></h1>
-        <p className="local-services-intro">I'm Nagarajan, a Rameswaram-based full stack developer. I build business websites, online shops, apps and custom software for businesses in Rameswaram and Ramanathapuram.</p>
+        <h1 id="local-services-title">Web developer and website designer in <span className="gradient-text">Rameswaram</span></h1>
+        <p className="local-services-intro">mj devx builds responsive business websites, e-commerce stores, booking systems and custom web applications for businesses in Rameswaram and Ramanathapuram.</p>
         <div className="local-services-grid">
           {services.map(({ icon: Icon, title, copy }) => (
             <article className="local-service-card" key={title}>
