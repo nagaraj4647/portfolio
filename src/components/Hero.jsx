@@ -414,6 +414,17 @@ function LocalServices() {
             <Link to="/contact" className="local-services-primary">Discuss your website <ArrowRight size={16} aria-hidden="true" /></Link>
           </div>
         </div>
+        <div id="ramanathapuram-services" className="local-services-work" aria-labelledby="ramanathapuram-title">
+          <div>
+            <p className="local-services-eyebrow">MJ DEVX · RAMANATHAPURAM</p>
+            <h2 id="ramanathapuram-title">Web developer in Ramanathapuram</h2>
+            <p>Need a website for your Ramanathapuram business? mj devx builds mobile-friendly business websites, online stores, booking systems and custom web applications. Share your services, products and website goals to discuss the right setup for your business.</p>
+          </div>
+          <div className="local-services-actions">
+            <Link to="/projects">Explore projects <ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link to="/contact" className="local-services-primary">Discuss your project <ArrowRight size={16} aria-hidden="true" /></Link>
+          </div>
+        </div>
       </div>
     </section>
   );
