@@ -357,6 +357,7 @@ export default function Hero() {
       `}</style>
     </section>
     <LocalServices />
+    <LocalFAQ />
     <style>{`/* Keep the portfolio's glass-card palette. */
 .local-services { padding-top: 48px; padding-bottom: 88px; }
 .local-services-eyebrow { color: #a5b4fc; font-size: .78rem; font-weight: 700; letter-spacing: .12em; margin-bottom: 14px; }
@@ -426,6 +427,44 @@ function LocalServices() {
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+
+const localFaqs = [
+  { question: 'Who builds websites for businesses in Rameswaram?', answer: "mj devx is Nagarajan M's web-development brand based in Rameswaram. Services include business websites, online stores, booking systems and custom web applications." },
+  { question: 'Does mj devx work with businesses in Ramanathapuram?', answer: 'Yes. mj devx works with businesses in Rameswaram and Ramanathapuram, both online and in person. Use the contact page to discuss your location and project.' },
+  { question: 'Can I see examples before discussing a website?', answer: 'Yes. The projects page includes the Sri Balaji Tailoring website and booking portal, plus clearly labelled demo projects.' },
+  { question: 'How do I ask about a website or booking system?', answer: 'Open the contact page and share your name, email and project needs. The contact form opens WhatsApp with your message so you can review it before sending.' },
+];
+
+function LocalFAQ() {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': 'https://mjdevx.vercel.app/#website-faq',
+    mainEntity: localFaqs.map(({ question, answer }) => ({
+      '@type': 'Question', name: question,
+      acceptedAnswer: { '@type': 'Answer', text: answer },
+    })),
+  };
+  return (
+    <section id="website-faq" className="section" aria-labelledby="website-faq-title" style={{ paddingTop: 0, paddingBottom: 72 }}>
+      <div className="container">
+        <p className="local-services-eyebrow">MJ DEVX · YOUR QUESTIONS</p>
+        <h2 id="website-faq-title" style={{ fontFamily: "'Outfit', 'Inter', sans-serif", fontSize: 'clamp(1.6rem, 3vw, 2.3rem)', marginBottom: 24 }}>Website questions, answered</h2>
+        <div style={{ display: 'grid', gap: 16 }}>
+          {localFaqs.map(({ question, answer }) => (
+            <article key={question} className="local-service-card">
+              <h3 style={{ fontSize: '1.05rem', lineHeight: 1.5, marginBottom: 10 }}>{question}</h3>
+              <p>{answer}</p>
+            </article>
+          ))}
+        </div>
+        <Link to="/contact" style={{ display: 'inline-block', marginTop: 24, color: '#a5b4fc' }}>Discuss your website</Link>
+      </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\u003c') }} />
     </section>
   );
 }
